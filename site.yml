@@ -1,0 +1,26 @@
+---
+
+- name: Create and start LXC container(s)
+  hosts: proxmox
+  gather_facts: false
+
+  roles:
+    - proxmox-lxc
+
+- name: Check if LXC container is already subscribed to FreeIPA domain
+  hosts: containers
+  gather_facts: false
+
+  roles:
+    - idm-check
+
+- name: Provision LXC container(s)
+  hosts: containers
+  user: '{% if ipa_subscribed != true %}root{% endif %}'
+  become: '{% if ipa_subscribed == true %}yes{% else %}no{% endif %}'
+  gather_facts: false
+
+  roles:
+    - common
+    - idm-client
+    - secure-ssh

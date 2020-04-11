@@ -1,0 +1,46 @@
+---
+
+- name: Create container(s)
+  proxmox:
+    api_host: '{{ api_host }}'
+    api_user: '{{ api_user }}'
+    api_password: '{{ api_password }}'
+    node: '{{ node | default(defaults.node) }}'
+    hostname: '{{ hostvars[item]["inventory_hostname"] }}'
+    vmid: '{{ hostvars[item].vmid }}'
+    storage: '{{ hostvars[item].storage | default(defaults.storage) }}'
+    cores: '{{ hostvars[item].cores | default(defaults.cores) }}'
+    memory: '{{ hostvars[item].memory | default(defaults.memory.ct) }}'
+    swap: '{{ hostvars[item].swap | default([]) }}'
+    onboot: '{{ hostvars[item].onboot | default(defaults.onboot) }}'
+    pubkey: '{{ hostvars[item].pubkey | default(defaults.pubkey) }}'
+    searchdomain: '{{ hostvars[item].searchdomain | default(defaults.searchdomain) }}'
+    nameserver: '{{ hostvars[item].nameserver | default(defaults.nameserver) }}'
+    ostemplate: '{{ hostvars[item].ostemplate | default(defaults.ostemplate) }}'
+    netif: '{{ hostvars[item].network }}'
+    state: 'present'
+  with_items: '{{ groups["containers"] }}'
+  loop_control:
+    pause: 5
+  register: created_containers
+
+- name: sleep
+  pause:
+    seconds: 10
+  when: created_containers.changed
+
+- name: Start container(s)
+  proxmox:
+    api_host: '{{ api_host }}'
+    api_user: '{{ api_user }}'
+    api_password: '{{ api_password }}'
+    node: '{{ hostvars[item.item].node }}'
+    hostname: '{{ hostvars[item.item].inventory_hostname }}'
+    state: 'started'
+  with_items: '{{ created_containers.results }}'
+  when: created_containers.changed
+
+- name: sleep
+  pause:
+    seconds: 10
+  when: created_containers.changed

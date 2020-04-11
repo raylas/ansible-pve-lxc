@@ -1,0 +1,10 @@
+---
+
+- name: 'Check host subscription'
+  local_action: 'command ssh -q -o BatchMode=yes -o ConnectTimeout=3 {{ ansible_host }} "echo true"'
+  register: is_subscribed
+  changed_when: false
+  failed_when: false
+
+- name: Set fact
+  set_fact: ipa_subscribed='{{ is_subscribed.stdout }}'

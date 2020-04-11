@@ -1,0 +1,12 @@
+---
+
+proxmox:
+  hosts:
+    pve.site.domain
+
+containers:
+  hosts:
+    db1.site.domain:
+      ansible_host: 10.0.10.125
+    app1.site.domain:
+      ansible_host: 10.0.10.126

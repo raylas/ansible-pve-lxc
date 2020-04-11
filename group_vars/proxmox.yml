@@ -1,0 +1,16 @@
+---
+
+api_host: 'pve.site.domain'
+api_user: 'root@pam'
+
+defaults:
+  node: 'gold'
+  storage: 'local-zfs'
+  cores: '1'
+  memory: '1024'
+  onboot: true
+  pubkey: '{{ ssh_pubkey }}'
+  searchdomain: 'site.domain'
+  nameserver: '1.1.1.1,8.8.8.8'
+  ostemplate: 'bulk:vztmpl/centos-8-20200402_amd64.tar.gz'
+  network: '{"net0":"name=eth0,ip=dhcp,ip6=dhcp,bridge=vmbr1"}'

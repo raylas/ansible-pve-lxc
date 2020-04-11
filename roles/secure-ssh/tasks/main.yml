@@ -1,0 +1,17 @@
+---
+
+- name: Disable sshd password authentication and root login
+  lineinfile:
+    path: /etc/ssh/sshd_config
+    regexp: "{{ item.regexp }}"
+    line: "{{ item.line }}"
+  with_items:
+    - regexp: '^PasswordAuthentication '
+      line: PasswordAuthentication no
+    - regexp: '^PermitRootLogin '
+      line: PermitRootLogin no
+  register: sshd_config
+         
+- name: Restart and enable sshd service
+  service: name=sshd state=restarted enabled=yes
+  when: sshd_config.changed

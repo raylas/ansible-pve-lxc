@@ -1,0 +1,9 @@
+---
+
+node: 'gold'
+vmid: '111'
+cores: '2'
+memory: '2048'
+swap: '0'
+onboot: true
+network: '{"net0":"name=eth0,ip=10.0.10.126/24,gw=10.0.10.1,ip6=dhcp,bridge=vmbr1"}'

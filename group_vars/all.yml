@@ -1,0 +1,8 @@
+---
+
+api_password: '<proxmox_api_password>'
+ssh_pubkey: '<ssh_public_key>'
+ipa_domain: 'ipa.site.domain'
+ipa_realm: 'IPA.site.domain'
+ipa_principal: 'admin'
+ipa_principal_password: '<ipa_admin_password>'

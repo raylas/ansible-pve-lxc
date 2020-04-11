@@ -1,0 +1,40 @@
+---
+
+# - name: Enable idm:DL1 module
+#   command: dnf module enable idm:DL1 -y
+#   args:
+#     warn: false
+
+- name: Enable idm:DL1 module
+  dnf:
+    name: '@idm:DL1'
+    state: present
+
+- name: Sync DNF
+  command: dnf distro-sync -y
+  register: dnf_sync
+  changed_when: '"Nothing to do." not in dnf_sync.stdout'
+  args:
+    warn: false
+
+- name: Install IDM-related packages
+  yum:
+    name:
+      - ipa-server-trust-ad
+      - ipa-server-dns
+      - openldap-devel
+    state: present
+
+- name: Join IPA realm
+  command: >
+    ipa-client-install -p {{ ipa_principal }} -w '{{ ipa_principal_password }}'
+    --mkhomedir                  
+    --no-ntp
+    --domain {{ ipa_domain }}
+    --realm {{ ipa_realm }}
+    --enable-dns-updates
+    --unattended
+    --force-join
+  register: ipa_client_install
+  changed_when: '"client is already configured" not in ipa_client_install.stderr'
+  failed_when: false
