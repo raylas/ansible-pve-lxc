@@ -1,11 +1,11 @@
 # ansible-pve-lxc
 
-ansible-pve-lxc is an Ansible playbook and set of roles for provisioning and configuring LXC containers in a [Proxmox]() virtual environment, and subsequently subscribing them to a [FreeIPA]() domain.
+ansible-pve-lxc is an Ansible playbook and set of roles for provisioning and configuring LXC containers in a [Proxmox](https://www.proxmox.com/en/) virtual environment, and subsequently subscribing them to a [FreeIPA](https://www.freeipa.org/page/Main_Page) domain.
 
 Functionality:
 
 - Provisions LXC containers on one or more PVE nodes (proxmox-lxc role)
-- Checks if existing containers are already subscribed to FreeIPA domain
+- Checks if existing containers are already subscribed to FreeIPA domain (idm-check role)
 - Configures defined containers (currently Centos 8 only) with sensible defaults (common role)
 - Subscribes defined containers (currently Centos 8 only) to FreeIPA domain (idm-client role)
 - Secures default sshd configuration
@@ -112,7 +112,7 @@ $ ansible-vault encrypt group_vars/all.yml
 
 ## Use ansible-pve-lxc
 
-- Optional: Temporarily disable ssh host key checking
+- **Optional**: Temporarily disable ssh host key checking
 
 ```bash
 $ export ANSIBLE_HOST_KEY_CHECKING=False
@@ -124,13 +124,13 @@ $ export ANSIBLE_HOST_KEY_CHECKING=False
 $ ansible-playbook -i inventory site.yml --ask-become-pass
 ```
 
-- Or run playbook, while asking for the vault password interactively
+- Run playbook while asking for the vault password interactively
 
 ```bash
 $ ansible-playbook -i inventory site.yml --ask-become-pass --ask-vault-pass
 ```
 
-- Optional: Re-enable ssh host key checking
+- **Optional**: Re-enable ssh host key checking
 
 ```bash
 $ unset ANSIBLE_HOST_KEY_CHECKING
