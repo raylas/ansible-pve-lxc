@@ -104,7 +104,7 @@ ipa_principal: 'admin'
 ipa_admin_pw: '<ipa_admin_password>'
 ```
 
-- Optional (but suggested!): Use ansible-vault to encrypt `group_vars/all.yml`
+- **Optional** (but suggested!): Use ansible-vault to encrypt `group_vars/all.yml`
 
 ```bash
 $ ansible-vault encrypt group_vars/all.yml
