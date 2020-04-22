@@ -18,7 +18,7 @@
   hosts: containers
   user: '{% if ipa_subscribed != true %}root{% endif %}'
   become: '{% if ipa_subscribed == true %}yes{% else %}no{% endif %}'
-  gather_facts: false
+  gather_facts: true
 
   roles:
     - common
