@@ -8,30 +8,11 @@
 
 - name: Install some useful packages
   apt:
-    name:
-      - tar
-      - unattended-upgrades
-      - vim
-      - wget
-      - less
-      - sudo
-      - man
-      - hostname
-      - htop
-      - tcpdump
-      - patch
-      - git
-      - gcc
-      - make
-      - autoconf
-      - automake
-      - pkg-config
-      - curl
-      - findutils
-      - samba
-      - python3-pip
-      # - python-dev
+    name: '{{ item }}'
     state: present
+  with_items:
+      - '{{ common_packages }}'
+      - '{{ ubuntu_packages }}'
 
 - name: Configure APT automatic updates
   lineinfile:

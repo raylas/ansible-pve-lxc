@@ -11,30 +11,11 @@
 
 - name: Install some useful packages
   yum:
-    name:
-      - tar
-      - dnf-automatic
-      - vim
-      - wget
-      - less
-      - sudo
-      - man
-      - hostname
-      - htop
-      - tcpdump
-      - patch
-      - git
-      - gcc
-      - make
-      - autoconf
-      - automake
-      - pkgconfig
-      - curl
-      - findutils
-      - samba
-      - python3-pip
-      - platform-python-devel
+    name: '{{ item }}'
     state: present
+  with_items:
+      - '{{ common_packages }}'
+      - '{{ redhat_packages }}'
 
 - name: Configure DNF automatic updates
   lineinfile:

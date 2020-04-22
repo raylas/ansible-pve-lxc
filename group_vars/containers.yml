@@ -1,0 +1,30 @@
+---
+
+common_packages:
+  - tar
+  - vim
+  - wget
+  - less
+  - sudo
+  - man
+  - hostname
+  - htop
+  - tcpdump
+  - patch
+  - git
+  - gcc
+  - make
+  - autoconf
+  - automake
+  - curl
+  - findutils
+  - samba
+  - python3-pip
+
+redhat_packages:
+  - dnf-automatic
+  - pkgconfig
+  - platform-python-devel
+
+ubuntu_packages:
+  - unattended-upgrades
