@@ -5,5 +5,7 @@ vmid: '110'
 cores: '1'
 memory: '1024'
 swap: '0'
+disk: '10'
 onboot: true
+ostemplate: 'bulk:vztmpl/ubuntu-19.10-standard_19.10-1_amd64.tar.gz'
 network: '{"net0":"name=eth0,ip=10.0.10.125/24,gw=10.0.10.1,ip6=dhcp,bridge=vmbr1"}'

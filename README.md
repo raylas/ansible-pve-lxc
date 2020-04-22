@@ -13,6 +13,7 @@ Functionality:
 Todo:
 
 - Add better `failed_when` logic to ipa-client-install task
+- ~~Include Ubuntu-compatible roles~~
 - Include Debian-compatible roles
 
 ## Define inventory with container configurations
@@ -46,7 +47,9 @@ vmid: '110'
 cores: '1'
 memory: '1024'
 swap: '0'
+disk: '10'
 onboot: true
+ostemplate: 'bulk:vztmpl/ubuntu-19.10-standard_19.10-1_amd64.tar.gz'
 network: '{"net0":"name=eth0,ip=10.0.10.125/24,gw=10.0.10.1,ip6=dhcp,bridge=vmbr1"}'
 ```
 
@@ -60,6 +63,7 @@ vmid: '111'
 cores: '2'
 memory: '2048'
 swap: '0'
+disk: '5'
 onboot: true
 network: '{"net0":"name=eth0,ip=10.0.10.126/24,gw=10.0.10.1,ip6=dhcp,bridge=vmbr1"}'
 ```
@@ -81,6 +85,7 @@ defaults:
   storage: 'local-zfs'
   cores: '1'
   memory: '1024'
+  disk: '3'
   onboot: true
   pubkey: '{{ ssh_pubkey }}'
   searchdomain: 'site.domain'

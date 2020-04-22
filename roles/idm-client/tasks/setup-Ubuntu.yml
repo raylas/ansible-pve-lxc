@@ -1,0 +1,7 @@
+---
+
+- name: Install IDM-related packages
+  apt:
+    name:
+      - freeipa-client
+    state: present

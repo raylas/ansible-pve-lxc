@@ -1,29 +1,10 @@
 ---
 
-# - name: Enable idm:DL1 module
-#   command: dnf module enable idm:DL1 -y
-#   args:
-#     warn: false
+- include_tasks: setup-RedHat.yml
+  when: ansible_os_family == 'RedHat'
 
-- name: Enable idm:DL1 module
-  dnf:
-    name: '@idm:DL1'
-    state: present
-
-- name: Sync DNF
-  command: dnf distro-sync -y
-  register: dnf_sync
-  changed_when: '"Nothing to do." not in dnf_sync.stdout'
-  args:
-    warn: false
-
-- name: Install IDM-related packages
-  yum:
-    name:
-      - ipa-server-trust-ad
-      - ipa-server-dns
-      - openldap-devel
-    state: present
+- include_tasks: setup-Ubuntu.yml
+  when: ansible_distribution == 'Ubuntu'
 
 - name: Join IPA realm
   command: >

@@ -9,6 +9,7 @@
     hostname: '{{ hostvars[item]["inventory_hostname"] }}'
     vmid: '{{ hostvars[item].vmid }}'
     storage: '{{ hostvars[item].storage | default(defaults.storage) }}'
+    disk: '{{ hostvars[item].disk | default(defaults.disk) }}'
     cores: '{{ hostvars[item].cores | default(defaults.cores) }}'
     memory: '{{ hostvars[item].memory | default(defaults.memory.ct) }}'
     swap: '{{ hostvars[item].swap | default([]) }}'

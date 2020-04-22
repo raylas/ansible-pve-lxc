@@ -1,0 +1,21 @@
+---
+
+- name: Enable idm:DL1 module
+  dnf:
+    name: '@idm:DL1'
+    state: present
+
+- name: Sync DNF
+  command: dnf distro-sync -y
+  register: dnf_sync
+  changed_when: '"Nothing to do." not in dnf_sync.stdout'
+  args:
+    warn: false
+
+- name: Install IDM-related packages
+  yum:
+    name:
+      - ipa-server-trust-ad
+      - ipa-server-dns
+      - openldap-devel
+    state: present

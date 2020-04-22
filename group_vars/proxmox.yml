@@ -8,6 +8,7 @@ defaults:
   storage: 'local-zfs'
   cores: '1'
   memory: '1024'
+  disk: '3'
   onboot: true
   pubkey: '{{ ssh_pubkey }}'
   searchdomain: 'site.domain'

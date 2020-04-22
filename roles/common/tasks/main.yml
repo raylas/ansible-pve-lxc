@@ -4,47 +4,8 @@
   timezone:
     name: America/Los_Angeles
 
-- name: Update yum cache
-  yum: update_cache=yes 
+- include_tasks: setup-RedHat.yml
+  when: ansible_os_family == 'RedHat'
 
-- name: Install EPEL repository
-  yum: name=epel-release state=present
-
-- name: Update all installed packages
-  yum: update_only=yes
-
-- name: Install some useful packages
-  yum:
-    name:
-      - tar
-      - dnf-automatic
-      - vim
-      - wget
-      - less
-      - sudo
-      - man
-      - hostname
-      - htop
-      - tcpdump
-      - patch
-      - git
-      - gcc
-      - make
-      - autoconf
-      - automake
-      - pkgconfig
-      - curl
-      - findutils
-      - samba
-      - python3-pip
-      - platform-python-devel
-    state: present
-
-- name: Configure DNF automatic updates
-  lineinfile:
-    path: /etc/dnf/automatic.conf
-    regexp: '^apply_updates ='
-    line: apply_updates = yes
-
-- name: Start and enable dnf-automatic service
-  service: name=dnf-automatic.timer state=started enabled=yes
+- include_tasks: setup-Ubuntu.yml
+  when: ansible_distribution == 'Ubuntu'
