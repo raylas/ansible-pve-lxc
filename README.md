@@ -1,4 +1,4 @@
-# ansible-pve-lxc
+#ansible-pve-lxc
 
 ansible-pve-lxc is an Ansible playbook and set of roles for provisioning and configuring LXC containers in a [Proxmox](https://www.proxmox.com/en/) virtual environment, and subsequently subscribing them to a [FreeIPA](https://www.freeipa.org/page/Main_Page) domain.
 
@@ -6,8 +6,8 @@ Functionality:
 
 - Provisions LXC containers on one or more PVE nodes (proxmox-lxc role)
 - Checks if existing containers are already subscribed to FreeIPA domain (idm-check role)
-- Configures defined containers (currently Centos 8 only) with sensible defaults (common role)
-- Subscribes defined containers (currently Centos 8 only) to FreeIPA domain (idm-client role)
+- Configures defined containers with sensible defaults (common role)
+- Subscribes defined containers to FreeIPA domain (idm-client role)
 - Secures default sshd configuration
 
 Todo:
